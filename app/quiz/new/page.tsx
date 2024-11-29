@@ -20,6 +20,13 @@ import {
 import { Progress } from "@/components/ui/progress"
 import Quiz from "@/app/components/quiz/quiz"
 import { Link } from "@/components/ui/link"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 export default function NewQuiz() {
   const [files, setFiles] = useState<File[]>([])
@@ -29,6 +36,7 @@ export default function NewQuiz() {
   const [quizId, setQuizId] = useState<string>("")
   const router = useRouter()
   const supabase = createSupabaseBrowser()
+  const [numberOfQuestions, setNumberOfQuestions] = useState<number>(4)
 
   const {
     submit,
@@ -96,7 +104,7 @@ export default function NewQuiz() {
         data: await encodeFileAsBase64(file),
       })),
     )
-    submit({ files: encodedFiles })
+    submit({ files: encodedFiles, numberOfQuestions })
     const generatedTitle = await generateQuizTitle(encodedFiles[0].name)
     setTitle(generatedTitle)
   }
@@ -104,7 +112,7 @@ export default function NewQuiz() {
   // Save quiz to Supabase when questions are generated
   useEffect(() => {
     async function saveQuiz() {
-      if (questions.length === 4 && title) {
+      if (questions.length === numberOfQuestions && title) {
         // First get the current user
         const { data: { user } } = await supabase.auth.getUser()
         
@@ -144,9 +152,9 @@ export default function NewQuiz() {
     setQuizId("")
   }
 
-  const progress = partialQuestions ? (partialQuestions.length / 4) * 100 : 0
+  const progress = partialQuestions ? (partialQuestions.length / numberOfQuestions) * 100 : 0
 
-  if (questions.length === 4) {
+  if (questions.length === numberOfQuestions) {
     if (!quizId) {
       return (
         <div className="container py-6">
@@ -218,20 +226,38 @@ export default function NewQuiz() {
                   )}
                 </p>
               </div>
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={files.length === 0 || isLoading}
-              >
-                {isLoading ? (
-                  <span className="flex items-center space-x-2">
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    <span>Generating Quiz...</span>
-                  </span>
-                ) : (
-                  "Generate Quiz"
-                )}
-              </Button>
+
+              <div className="space-y-4">
+                <Select
+                  value={numberOfQuestions.toString()}
+                  onValueChange={(value) => setNumberOfQuestions(Number(value))}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Number of questions" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="4">4 Questions</SelectItem>
+                    <SelectItem value="6">6 Questions</SelectItem>
+                    <SelectItem value="8">8 Questions</SelectItem>
+                    <SelectItem value="10">10 Questions</SelectItem>
+                  </SelectContent>
+                </Select>
+
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={files.length === 0 || isLoading}
+                >
+                  {isLoading ? (
+                    <span className="flex items-center space-x-2">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span>Generating Quiz...</span>
+                    </span>
+                  ) : (
+                    "Generate Quiz"
+                  )}
+                </Button>
+              </div>
             </form>
           </CardContent>
           {isLoading && (

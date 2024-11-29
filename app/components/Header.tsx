@@ -39,7 +39,7 @@ export function Header() {
       <div className="flex h-16 items-center justify-between px-4 max-w-7xl mx-auto">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/learning-hub.png" alt="Learning Hub" width={32} height={32} />
+            <Image src="/learning-hub-logo.png" alt="Learning Hub" width={32} height={32} />
             <span className="text-xl font-bold">Learning Hub</span>
           </Link>
         </div>

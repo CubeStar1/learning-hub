@@ -23,6 +23,40 @@ interface QuestionResponse {
   isCorrect: boolean
 }
 
+function normalizeAnswer(answer: string): string {
+  // Remove punctuation, convert to lowercase, and trim whitespace
+  return answer
+    .toLowerCase()
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+}
+
+function compareAnswers(userAnswer: string, correctAnswer: string): boolean {
+  const normalizedUser = normalizeAnswer(userAnswer)
+  const normalizedCorrect = normalizeAnswer(correctAnswer)
+  
+  // Direct match after normalization
+  if (normalizedUser === normalizedCorrect) return true
+  
+  // Check for negation patterns (e.g., "does" vs "does not")
+  const userHasNegation = /\b(not|cannot|doesn'?t|won'?t|isn'?t)\b/.test(normalizedUser)
+  const correctHasNegation = /\b(not|cannot|doesn'?t|won'?t|isn'?t)\b/.test(normalizedCorrect)
+  
+  // If one has negation and the other doesn't, they're different
+  if (userHasNegation !== correctHasNegation) return false
+  
+  // Remove common articles and helping verbs for more flexible matching
+  const cleanUser = normalizedUser
+    .replace(/\b(a|an|the|is|are|was|were|will|be)\b/g, "")
+    .trim()
+  const cleanCorrect = normalizedCorrect
+    .replace(/\b(a|an|the|is|are|was|were|will|be)\b/g, "")
+    .trim()
+    
+  return cleanUser === cleanCorrect
+}
+
 export default function Quiz({ title, questions, quizId, clearPDF }: QuizProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [responses, setResponses] = useState<QuestionResponse[]>([])
@@ -31,7 +65,7 @@ export default function Quiz({ title, questions, quizId, clearPDF }: QuizProps) 
   const supabase = createSupabaseBrowser()
 
   const handleAnswer = async (selectedAnswer: string) => {
-    const isCorrect = selectedAnswer === questions[currentQuestion].correctAnswer
+    const isCorrect = compareAnswers(selectedAnswer, questions[currentQuestion].correctAnswer)
     const response: QuestionResponse = {
       questionIndex: currentQuestion,
       question: questions[currentQuestion].question,
