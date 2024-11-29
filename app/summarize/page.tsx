@@ -78,7 +78,9 @@ export default function Summarize() {
 
     try {
       const file = files[0]
-      const base64Data = await encodeFileAsBase64(file)
+      const base64Data = await encodeFileAsBase64(file) 
+
+      
       
       await complete({
         prompt: {
