@@ -43,7 +43,7 @@ export default function SignIn() {
 			<div className="p-5 space-y-5">
 				<div className="text-center space-y-3">
 					<Image
-						src={"/learning-hub.png"}
+						src={"/learning-hub-logo.png"}
 						alt="supabase logo"
 						width={50}
 						height={50}
