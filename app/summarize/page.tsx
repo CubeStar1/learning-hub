@@ -22,10 +22,51 @@ interface FileData {
   data: string;
 }
 
+// Add this mock data
+const MOCK_SUMMARY = `# Operating System Process Synchronization Summary
+
+## Key Points
+
+* **Process Synchronization** is a fundamental concept in operating systems that manages concurrent access to shared resources
+* **Race Conditions** occur when multiple processes access shared data simultaneously
+* **Critical Section** is the part of code where shared resources are accessed
+* **Mutual Exclusion** ensures only one process can execute in the critical section at a time
+
+## Important Details
+
+### Synchronization Mechanisms
+
+1. **Mutex Locks**
+   * Simple solution for mutual exclusion
+   * Uses acquire() and release() operations
+   * Provides strict mutual exclusion
+
+2. **Semaphores**
+   * More versatile than mutex locks
+   * Can handle multiple resources
+   * Types:
+     * Binary semaphores (similar to mutex)
+     * Counting semaphores (for multiple resources)
+
+3. **Monitors**
+   * High-level synchronization construct
+   * Provides built-in mutual exclusion
+   * Uses condition variables for process coordination
+
+## Conclusions
+
+* Process synchronization is crucial for maintaining data consistency
+* Multiple solutions exist, each with their own trade-offs
+* Key challenges include:
+  * Avoiding deadlocks
+  * Preventing starvation
+  * Ensuring fairness`;
+
 export default function Summarize() {
   const [files, setFiles] = useState<File[]>([])
   const [isDragging, setIsDragging] = useState(false)
   const [showSelectMaterial, setShowSelectMaterial] = useState(false)
+  const [summary, setSummary] = useState<string>("")
 
   const {
     completion,
@@ -77,20 +118,13 @@ export default function Summarize() {
     }
 
     try {
-      const file = files[0]
-      const base64Data = await encodeFileAsBase64(file) 
-
+      // Simulate loading
+      setSummary("")
+      await new Promise(resolve => setTimeout(resolve, 2000))
       
-      
-      await complete({
-        prompt: {
-          files: [{
-            name: file.name,
-            type: file.type,
-            data: base64Data
-          }]
-        }
-      })
+      // Set mock summary
+      setSummary(MOCK_SUMMARY)
+      toast.success("Summary generated successfully!")
     } catch (error) {
       console.error('Error processing file:', error)
       toast.error("Failed to process the file")
@@ -211,13 +245,13 @@ export default function Summarize() {
             )}
 
             {/* Summary Display */}
-            {completion && (
+            {summary && (
               <Card className="border border-gray-100 dark:border-gray-800 shadow-xl overflow-hidden">
                 <CardHeader>
                   <CardTitle>Summary</CardTitle>
                 </CardHeader>
                 <CardContent className="prose dark:prose-invert max-w-none p-6">
-                  <Markdown>{completion}</Markdown>
+                  <Markdown>{summary}</Markdown>
                 </CardContent>
               </Card>
             )}
