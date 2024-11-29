@@ -13,7 +13,6 @@ export function usePlaynotes() {
       if (!response.ok) throw new Error('Failed to fetch playnotes')
       const data = await response.json()
       
-      // Sort by creation date and put generating ones first
       const sortedData = data.sort((a: PlayNote, b: PlayNote) => {
         if (a.status === 'generating' && b.status !== 'generating') return -1
         if (a.status !== 'generating' && b.status === 'generating') return 1
