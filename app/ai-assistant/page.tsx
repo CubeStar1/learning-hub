@@ -152,7 +152,7 @@ export default function AIAssistant() {
             <span>Need help? Just ask the AI Assistant using the chat widget!</span>
         </div>
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          Example: "Generate a quiz about large language models"
+          Example: &apos;Generate a quiz about large language models&apos;
         </p>
       </div>
     </div>
