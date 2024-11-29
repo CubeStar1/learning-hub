@@ -17,6 +17,16 @@ import { Bot, Sparkles } from "lucide-react"
 
 const components = [
   {
+    title: "Dashboard",
+    href: "/ai-assistant",
+    description: "View your learning dashboard"
+  },
+  {
+    title: "Summarize",
+    href: "/summarize",
+    description: "Generate AI summaries of your documents"
+  },
+  {
     title: "Podcast",
     href: "/podcast",
     description: "Convert PDFs to engaging podcast conversations"

@@ -2,7 +2,8 @@
 import { useEffect } from "react";
 import { open as openEmbed } from "@play-ai/web-embed";
 import { useRouter } from "next/navigation";
-import { Rocket, BookOpen, Headphones } from "lucide-react";
+import { Rocket, BookOpen, Headphones, Bot, Sparkles } from "lucide-react";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 
 const webEmbedId = process.env.NEXT_PUBLIC_PLAY_AI_WEB_EMBED_ID || "";
 
@@ -84,7 +85,16 @@ export default function AIAssistant() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8 text-center">Learning Hub Dashboard</h1>
+      {/* Hero Section */}
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center justify-center p-2 bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4">
+          <Bot className="h-6 w-6 text-purple-600 dark:text-purple-300" />
+        </div>
+        <h1 className="text-4xl font-bold mb-4">Learning Hub Dashboard</h1>
+        <p className="text-xl text-gray-600 dark:text-gray-300">
+          Your AI-powered learning companion
+        </p>
+      </div>
       
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Quiz Section */}
@@ -94,12 +104,14 @@ export default function AIAssistant() {
             <h2 className="text-2xl font-bold">Interactive Quizzes</h2>
           </div>
           <p className="mb-4">Create and take quizzes to test your knowledge. Upload documents and automatically generate questions.</p>
-          <button 
-            onClick={() => router.push('/quiz')}
-            className="bg-white text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-purple-50 transition-colors"
-          >
-            Explore Quizzes
-          </button>
+          <div className="flex justify-center w-full">
+            <RainbowButton 
+              onClick={() => router.push('/quiz')}
+              className="w-full"
+            >
+              Explore Quizzes
+            </RainbowButton>
+          </div>
         </div>
 
         {/* Podcast Section */}
@@ -109,12 +121,14 @@ export default function AIAssistant() {
             <h2 className="text-2xl font-bold">Learning Podcasts</h2>
           </div>
           <p className="mb-4">Convert your study materials into engaging audio conversations. Perfect for auditory learners.</p>
-          <button 
-            onClick={() => router.push('/podcast')}
-            className="bg-white text-blue-600 px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors"
-          >
-            Create Podcast
-          </button>
+          <div className="flex justify-center w-full">
+            <RainbowButton 
+              onClick={() => router.push('/podcast')}
+              className="w-full"
+            >
+              Create Podcast
+            </RainbowButton>
+          </div>
         </div>
 
         {/* AI Assistant Section */}
@@ -124,15 +138,22 @@ export default function AIAssistant() {
             <h2 className="text-2xl font-bold">AI Assistant</h2>
           </div>
           <p className="mb-4">Get help navigating the platform and making the most of our learning tools. Just ask me anything!</p>
-          <p className="text-sm bg-white/20 p-3 rounded-lg">
-            Try saying: "I want to learn about machine learning" or "Create a podcast about history"
-          </p>
+          <div className="bg-white/20 p-3 rounded-lg backdrop-blur-sm">
+            <p className="text-sm">
+              Try saying: "I want to learn about machine learning" or "Create a podcast about history"
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="mt-12 text-center text-muted-foreground">
-        <p>Need help? Just ask the AI Assistant using the chat widget!</p>
-        <p className="text-sm mt-2">Example: "Generate a quiz about large language models"</p>
+      <div className="mt-12 text-center">
+        <div className="inline-flex items-center justify-center space-x-2 text-gray-600 dark:text-gray-300 mb-2">
+          <Sparkles className="h-5 w-5 text-purple-500" />
+          <span>Need help? Just ask the AI Assistant using the chat widget!</span>
+        </div>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Example: "Generate a quiz about large language models"
+        </p>
       </div>
     </div>
   );
