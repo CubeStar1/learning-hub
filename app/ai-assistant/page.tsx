@@ -74,11 +74,11 @@ export default function AIAssistant() {
         3. Navigate to different sections (quiz or podcast)
         
         When users want to:
-        - Create a quiz: Use the 'generate-quiz' event
-        - Create a podcast: Use the 'create-podcast' event
-        - See a section: Use the 'show-section' event
+        - Create a quiz: Use the &apos;generate-quiz&apos; event
+        - Create a podcast: Use the &apos;create-podcast&apos; event
+        - See a section: Use the &apos;show-section&apos; event
         
-        Always ask users what topic they're interested in learning about.
+        Always ask users what topic they&apos;re interested in learning about.
       `
     });
   }, []);
@@ -140,7 +140,7 @@ export default function AIAssistant() {
           <p className="mb-4">Get help navigating the platform and making the most of our learning tools. Just ask me anything!</p>
           <div className="bg-white/20 p-3 rounded-lg backdrop-blur-sm">
             <p className="text-sm">
-              Try saying: "I want to learn about machine learning" or "Create a podcast about history"
+              Try saying: &apos;I want to learn about machine learning&apos; or &apos;Create a podcast about history&apos;
             </p>
           </div>
         </div>
@@ -149,7 +149,7 @@ export default function AIAssistant() {
       <div className="mt-12 text-center">
         <div className="inline-flex items-center justify-center space-x-2 text-gray-600 dark:text-gray-300 mb-2">
           <Sparkles className="h-5 w-5 text-purple-500" />
-          <span>Need help? Just ask the AI Assistant using the chat widget!</span>
+            <span>Need help? Just ask the AI Assistant using the chat widget!</span>
         </div>
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Example: "Generate a quiz about large language models"
