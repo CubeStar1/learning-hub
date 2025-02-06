@@ -24,7 +24,7 @@ export default function Home() {
               dynamic podcasts, and an intelligent voice assistant that adapts to you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/dashboard">
+              <Link href="/ai-assistant">
                 <RainbowButton>
                   View Dashboard
                 </RainbowButton>
