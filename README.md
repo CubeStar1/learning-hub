@@ -1,20 +1,16 @@
 # AI Learning Hub
 
-Transform your study materials into engaging audio content with our AI-powered learning platform. Convert PDFs into interactive podcasts, generate smart quizzes, and learn with an AI tutor.
+A platform for converting PDFs into interactive podcasts and generating quizzes
 
-## 🎯 Core Features
+## Core Features
 
-### 📝 PDF to Podcast Conversion
+### PDF to Podcast Conversion
 - Transform any PDF document into natural-sounding conversations
-- Multiple AI voices for engaging dialogue
-- Support for academic papers, textbooks, and study materials
 - Custom voice speed and tone adjustments
 
-### 🤖 AI-Powered Learning Tools
+###  AI-Powered Learning Tools
 - **Smart Quiz Generation**: Automatically create quizzes from your study materials
 - **Intelligent Summaries**: Get concise summaries of complex documents
-- **24/7 AI Tutor**: Ask questions and get instant explanations
-- **Progress Analytics**: Track your learning journey with detailed insights
 
 ## 🚀 Getting Started
 
@@ -24,6 +20,7 @@ Transform your study materials into engaging audio content with our AI-powered l
 - Supabase account
 - OpenAI API key
 - Google AI API key
+- Playnote API key
 
 ### Installation
 
@@ -68,25 +65,11 @@ yarn dev
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## 💡 Usage
-
-### Converting PDFs to Podcasts
-1. Upload your PDF through the dashboard
-2. Select voice preferences and conversation style
-3. Wait for AI processing (typically 1-2 minutes)
-4. Download or stream your personalized audio content
-
-### Generating Quizzes
-1. Upload study material
-2. Choose quiz type (multiple choice, flash cards, etc.)
-3. Get AI-generated questions based on the content
-4. Track your performance and identify areas for improvement
 
 ## 🛠️ Tech Stack
 
 - **Frontend**: Next.js 14, TailwindCSS
 - **Backend**: Supabase
 - **AI Services**: 
-  - OpenAI GPT-4 for content understanding
-  - Google AI for natural language processing
   - Playnote API for audio generation
+  - Gemini API
